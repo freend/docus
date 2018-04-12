@@ -39,3 +39,41 @@ mariadb는 5와 10버전이 있으나 10은 mysql과의 호완성이 없다는 �
 <a href="http://brand-me.tistory.com/194" target="_blank">참조사이트</a>
 
 아직 java와 tomcat을 연결해주지 않아서 확인은 불가능하다.
+
+4. 패키지 센터로 가서 java8, tomcat7을 설치해주자.
+<a href="http://devks.tistory.com/18" target="_blank">참조사이트</a>
+만들때 공유 폴더 이름을 물어보는데 나는 그냥 Tomcat이라고 했다 그러면 최상위 공유
+폴더로 만들어진다.
+다 설치가 끝난후 내부아이피 주소:7070을 치면 에러페이지가 나온다. 뭐 물론 기본
+설정이기 때문에 내부아이피 주소:7070/manager/html등등을 뒤에 붙이면 정상적으로 나오는 걸 알 수 있다.
+하지만 우리가 만든 war파일이 아니니 다 필요없다
+해당 공유폴더의 모든 파일과 폴더를 다 지워주자.
+
+5. 이제 file station을 열면 최상위 폴더에 Tomcat이 보인다 거기다 war를 넣자.
+그러고 tomcat을 다시 켜면 되는데 터미널 등을 사용해도 되지만 패키지 센터에서
+설치됨을 보면 tomcat7이 보인다 그것을 열어주면 작업이라고 있는데 그것을 눌러서
+정지 시작하기를 해도 된다.
+
+이제 내부아이피주소:7070을 하면 톰캣으로 웹서버가 정상적으로 작동함을 알 수 있다.
+나같은 경우 aws의 RDS를 데이터베이스로 사용했으므로 서버는 nas에 있어도 RDS의 데이터베이스에
+접속해서 작동됨을 확인할 수 있다.
+이제 톰캣에서 포트번호를 변경해 보도록 하자.
+톰캣의 설정은 /var/packages/Tomcat7/target/src/conf 에 가서 보면
+server.xml이라는 파일이 있다.
+
+<Connector port="7070" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+<Connector executor="tomcatThreadPool"
+               port="7070" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+이라고되어있는부분의 포트번호를 변경하면 된다.
+이제 외부에서 접속해 보자 제어판의 외부억세스의 DDNS를 다시한번 보자
+호스트 이름이 있는데 절대 이거로 접속하면 안된다.
+이건 뒤에 포트번호 5000번이 붙어있는 거다.
+즉 name.synology.me 는 name.synology.me:5000이랑 동일하다
+ddns에 보면 외부주소 라는 ip주소가 있는데 우리가 붙을건 바로 이것이다.
+외부주소ip:포트번호 하면 이제 외부에서도 우리의 웹서버에 붙을 수 있는 것이다.
+
+이제 데이터 베이스도 나스로 옮겨볼 것이다.
