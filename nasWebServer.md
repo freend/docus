@@ -67,7 +67,7 @@ server.xml이라는 파일이 있다.
                connectionTimeout="20000"
                redirectPort="8443" />
 이라고되어있는부분의 포트번호를 변경하면 된다. 물론 해당 작업을 한 후 톰캣을 다시 작동시켜야 한다.
-이제 외부에서 접속해 보자 제어판의 외부억세스의 DDNS를 다시한번 보자
+6. 이제 외부에서 접속해 보자 제어판의 외부억세스의 DDNS를 다시한번 보자
 호스트 이름이 있는데 절대 이거로 접속하면 안된다.
 이건 뒤에 포트번호 5000번이 붙어있는 거다.
 즉 name.synology.me 는 name.synology.me:5000이랑 동일하다
@@ -75,3 +75,23 @@ ddns에 보면 외부주소 라는 ip주소가 있는데 우리가 붙을건 바
 외부주소ip:포트번호 하면 이제 외부에서도 우리의 웹서버에 붙을 수 있는 것이다.
 
 이제 데이터 베이스도 나스로 옮겨볼 것이다.
+7. 이제 많이 건너왔다 남은건 데이터베이스의 연결이다.
+mariaDB를 설치한다. 그냥 5버전을 설치하자 phpMyadmin을 설치해서 하자는 이야기가 있는데
+phpMyadmin을 설치하면 10버전을 설치해버리기 때문이다.
+참조사이트
+mariaDB 연결
+http://elvis-note.tistory.com/entry/Spring-%EA%B0%9C%EB%B0%9C-13-Mybatis-Maria-DB%EC%97%B0%EB%8F%99
+mariaDB는 mysql workbench로도 연결이 가능하다.
+우선 그전에 root의 비밀번호를 설정하자. 메인메뉴 선택 후 mariaDB 5를 선택하면 패스워드 변경 부분이 있다. 그걸 선택하고 패스워드
+재설정을 해서 mariaDB root의 비밀번호를 선정한다.
+이제 접속을 해보자. 외부아이피 주소와 포트번호를 맞추고 사용자 root와 비밀번호를 했는데 여기서 갑자기 에러가 발생한다.
+여기서 꽤 많이 고전을 했다. 
+MySQL, ERROR 1130 (HY000): Host '192.168.0.1' is not allowed to connect to this MySQL Server
+이건 또 뭔 소리야.. 한다.
+이건 해결하려면 터미널로 접속해야 한다.
+<a href="https://redmilk.co.kr/archives/1513" target="_blank">나스에서 터미널 실행하기</a>
+<a href="http://blog.naver.com/PostView.nhn?blogId=dotnetulsan&logNo=221049552960" target="_blank">mysql 에러 설정하기</a>
+
+mysql workbench로 가서 외부주소 포트번호 계정 비밀번호를 입력하면 접속이 된다.
+
+이제 마지막으로 나의 스프링 프레임워크 서버와 나스의 mariaDB를 연동하는 것만 남았다.
