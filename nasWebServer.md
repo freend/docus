@@ -93,5 +93,32 @@ MySQL, ERROR 1130 (HY000): Host '192.168.0.1' is not allowed to connect to this 
 <a href="http://blog.naver.com/PostView.nhn?blogId=dotnetulsan&logNo=221049552960" target="_blank">mysql 에러 설정하기</a>
 
 mysql workbench로 가서 외부주소 포트번호 계정 비밀번호를 입력하면 접속이 된다.
+이제 Data Import를 통해서 모든 데이터를 넣어준다.
 
 이제 마지막으로 나의 스프링 프레임워크 서버와 나스의 mariaDB를 연동하는 것만 남았다.
+
+8. pom.xml에서 mariaDB의 dependency를 추가해줍니다.
+"'<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+		<dependency>
+		    <groupId>org.mariadb.jdbc</groupId>
+		    <artifactId>mariadb-java-client</artifactId>
+		    <version>1.5.8</version>
+		</dependency>"'
+jdbc 설정을 변경합니다.
+mysql
+"'
+driver=com.mysql.jdbc.Driver
+url=jdbc:mysql:lcalhost:3456/DB_NAME
+"'
+mariaDB
+"'
+driver=org.mariadb.jdbc.Driver
+url=jdbc:mariadb://localhost:3456/DB_NAME
+"'
+보면 mariaDB는 ":"뒤에 "//"이 붙는다. 이제 외부주소로 들어가서 데이터베이스도
+정상적으로 연결되었는지 확인하자.
+
+추가.
+우리가 전에 사용하던 aws ubuntu에서는 tomcat이 설치된 경로는 /var/lib/tomcat7/webapps/이었는데
+nas의 경로는 /volume1/Tomcat/으로 이미지 업로드나 경로 변경에 관련된 작업을 해줘야 한다.
+내일은 git을 블로그로 변경하는 작업을 진행해보도록 하겠습니다.
