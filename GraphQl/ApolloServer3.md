@@ -296,3 +296,7 @@ Graphql을 사용하면서 제일 어려운 개념중의 하나인 schema로 들
     ```
 
   이렇게 해서 데이터를 query를 이용해서 가져오는 거 까지 진행했다.
+
+  #### Next to
+
+[[Mongo DB]](ApolloServer4.md)

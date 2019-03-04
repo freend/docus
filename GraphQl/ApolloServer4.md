@@ -110,3 +110,7 @@ const model = mongoose.model('Author', authorSchema);
 ```
 
 어디서 많이 본 것 같다. 바로 schema, resolvers에 있는 부분과 동일하게 데이터 모델 형을 가져왔다.
+
+#### Next to
+
+[[Mutation]](ApolloServer5.md)

@@ -76,3 +76,8 @@ GraphQL을 사용하기 위해서 graphql middle ware와 apollo server express�
   ```
 
   schema가 없단다. (뭐 계속 없다고만 하냐 ㅜㅜ) graphql2버전에서 1버전으로 다운그래이드 후 진행한 이유도 schema에 대해서 모르는데 error를 발생해서였다. 이제 여기서 개념을 잡고 넘어가도록 하자.
+
+#### Next to
+
+[Schema Resolver](ApolloServer3.md)
+
