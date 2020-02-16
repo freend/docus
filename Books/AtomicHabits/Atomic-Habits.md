@@ -25,4 +25,8 @@
 > 이 이야기가 이책에서 가장 크게 이야기 하는 부분이다. 그리고 습관의 형성과 습관의 유지에 대해 이야기한다.
 
 - [Part 1](Part1.md)
-- Part 2
+- [Part 2](Part2.md)
+- [Part 3](Part3.md)
+- [Part 4](Part4.md)
+- [Part 5](Part5.md)
+- [Part 6](Part6.md)
