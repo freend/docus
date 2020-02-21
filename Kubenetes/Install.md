@@ -14,6 +14,14 @@
 [root@k8s-master ~] yum update
 ```
 
+- 호스트 네임 설정
+
+```
+[root@localhost ~] hostnamectl set-hostname k8s-master
+```
+
+
+
 - 방화벽 해제
 
 ```shell
@@ -34,33 +42,33 @@
 - k8s.conf 설정
 
 ```shell
-[root@k8s-master ~]# cat <<EOF >  /etc/sysctl.d/k8s.conf
+[root@k8s-master ~] cat <<EOF >  /etc/sysctl.d/k8s.conf
 > net.bridge.bridge-nf-call-ip6tables = 1
 > net.bridge.bridge-nf-call-iptables = 1
 > EOF
-[root@k8s-master ~]# sysctl --system
+[root@k8s-master ~] sysctl --system
 ```
 
 - Kubernetes repository 설정
 
 ```shell
-[root@k8s-master ~]# cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-> [kubernetes]
-> name=Kubernetes
-> baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-> enabled=1
-> gpgcheck=1
-> repo_gpgcheck=1
-> gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg 
-> https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-> EOF
+[root@k8s-master ~] cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg 
+https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
 ```
 
 - Repo 설정
 
 ```shell
-[root@k8s-master ~]# cd /etc/yum.repos.d/
-[root@k8s-master yum.repos.d]# vi Daum.repo
+[root@k8s-master ~] cd /etc/yum.repos.d/
+[root@k8s-master yum.repos.d] nano Daum.repo
 [base]
 name=CentOS-$releasever - Base
 baseurl=http://ftp.daumkakao.com/centos/$releasever/os/$basearch/
@@ -90,17 +98,17 @@ gpgcheck=0
 
 [root@k8s-master ~] mkdir /etc/docker
 [root@k8s-master ~] cat > /etc/docker/daemon.json <<EOF
-> {
->   "exec-opts": ["native.cgroupdriver=systemd"],
->   "log-driver": "json-file",
->   "log-opts": {
->     "max-size": "100m"
->   },
->   "storage-driver": "overlay2",
->   "storage-opts": [
->     "overlay2.override_kernel_check=true"
->   ]
-> }
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
+}
 > EOF
 ```
 
@@ -115,9 +123,10 @@ gpgcheck=0
 
 ```shell
 [root@k8s-master ~] yum install -y --disableexcludes=kubernetes kubeadm-1.15.5-0.x86_64 kubectl-1.15.5-0.x86_64 kubelet-1.15.5-0.x86_64
-# 여기는 시스템 켜면 항상 해야 하네.
 [root@k8s-master ~] systemctl enable --now kubelet
 [root@k8s-master ~] swapoff -a
+# system on auto start
+[root@k8s-master ~] systemctl enable kubelet
 ```
 
 - 여기서 1차 고생 스타트 이렇게 했는데 kubelet이 안된다는 오류가 뜨기 시작했다. 인터넷으로 여기저거 해결책을 찾아봤는데 결국 이렇게 해서 해결했다. [관련링크](https://cloud.google.com/sdk/docs/downloads-interactive)
@@ -137,4 +146,5 @@ EOM
 ```
 
 - 다시 위의 install Kubernetes를 하면 정상 작동한다.
+- [참고](http://www.cubrid.com/blog/3820603)
 
