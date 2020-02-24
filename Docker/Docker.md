@@ -80,7 +80,7 @@ docker system events
 - docker 상태 모니터링(단일 컨테이너)
 
 ```shell
-docker stats container-name
+docker status container-name
 ```
 
 - Docker Command

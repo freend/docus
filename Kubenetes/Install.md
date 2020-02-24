@@ -3,16 +3,18 @@
 - Pod : Container 관리 Container입장에서는 이것이 가상머신임
 - Label : 각각을 key, value로 관리함.
 - kubeadm init시 ip를 줄 수도 있다. 안하면 kubenetes에서 임의로 설정함.
-- 설치하다가 오류 발생 gpg key 오류라고 하는데 이렇게 해결함
-  [해결법](https://cloud.google.com/sdk/docs/downloads-yum?hl=ko)
 
-### 설치하기
+### 시작하기 전에
 
-- update
+#### 네트워크 구성
 
-```shell
-[root@k8s-master ~] yum update
-```
+- master : 192.168.0.117
+- Node1 : 192.168.0.128
+- Node2 : 192.168.0.119
+
+[버철 피씨에 센트 OS 설치하기](../Centos/InstallOs.md)
+
+### 사전 설정
 
 - 호스트 네임 설정
 
@@ -20,15 +22,33 @@
 [root@localhost ~] hostnamectl set-hostname k8s-master
 ```
 
+- update
 
+```shell
+[root@k8s-master ~] yum update
+```
 
 - 방화벽 해제
 
 ```shell
-[root@k8s-master ~] systemctl disable firewalld #방화벽을 꺼줘야 한다. 일부만 허용해도 된다는데 난 계속 안되더라
+[root@k8s-master ~] systemctl disable firewalld #방화벽을 끄자. 일부만 허용해도 된다는데 난 계속 안되더라
+# 방화벽은 아래 참고사이트에 또다른 설치방법을 설명하는 페이지에서 볼 수 있다.
 ```
 
+- 여기서 잠깐!!! 뒤에 설치할때 오류가 발생 할 수도 있다. 이 곳을 한번 확인하라
 
+```shell
+[root@k8s-master ~] cat /etc/resolv.conf
+# 이게 없다면 추가해주자.
+nameserver 8.8.8.8 
+nameserver 8.8.4.4
+```
+
+여기서 여러분들이 문제가 될 수 있는게 존재한다. 바로 네트워크가 바뀌면 네트워크에 따라서 아이피가 바뀐다는 문제이다. 특히나 마스터는 크게 문제가 될 수 있다 추후 노드를 연결할 때 마스터의 아이피를 가지고 조인하기 때문이다. 그래서 여기서 마스터의 아이피를 고정시켜야 한다. 이때 사용할 수 있는게 바로 NMTUI라는 아이피 설정 명령이다.
+
+[아이피 설정하기](../Centos/nmtui.md)
+
+### 설치하기
 
 - hosts 설정
 
@@ -36,7 +56,7 @@
 [root@k8s-master ~] nano /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-192.168.0.110 k8s-master #이 부분을 추가했다. 나의 아이피에 k8s-master이라는 호스트 네임을 준다.
+192.168.0.117 k8s-master #이 부분을 추가했다. 나의 아이피에 k8s-master이라는 호스트 네임을 준다.
 ```
 
 - k8s.conf 설정
@@ -129,7 +149,7 @@ gpgcheck=0
 [root@k8s-master ~] systemctl enable kubelet
 ```
 
-- 여기서 1차 고생 스타트 이렇게 했는데 kubelet이 안된다는 오류가 뜨기 시작했다. 인터넷으로 여기저거 해결책을 찾아봤는데 결국 이렇게 해서 해결했다. [관련링크](https://cloud.google.com/sdk/docs/downloads-interactive)
+- 여기서 1차 고생. 이렇게 했는데 kubelet이 안된다는 오류가 뜨기 시작했다. 인터넷으로 여기저거 해결책을 찾아봤는데 결국 이렇게 해서 해결했다. [관련링크](https://cloud.google.com/sdk/docs/downloads-interactive)
 
 ```shell
 [root@k8s-master ~] tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
@@ -145,6 +165,7 @@ EOM
 [root@k8s-master ~] yum install google-cloud-sdk
 ```
 
-- 다시 위의 install Kubernetes를 하면 정상 작동한다.
-- [참고](http://www.cubrid.com/blog/3820603)
-
+- 다시 위의 install Kubernetes를 하면 정상 설치한다.
+- 그리고 뒤에 언급하겠지만 나는 대시보드를 설치하면서 하루 종일 고생했다. 가능하면 여기서(버철pc를 쓴다는 가정하에) 스냅샷을 찍어두자.
+- [쿠버네티스 설치 참고사이트 1](http://www.cubrid.com/blog/3820603)
+- [쿠버네티스 설치 참고사이트 2](https://waspro.tistory.com/506)
