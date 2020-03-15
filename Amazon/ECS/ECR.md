@@ -65,3 +65,8 @@ docker push 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/sample-repo:latest
 - AWS의 프리 티어를 사용하는 신규 AWS 고객은 모든 AWS 서비스를 합산해 1년 동안 매달 15GB의 데이터 전송을 무료로 제공받게 됩니다.
 
 - 데이터 전송요금은 별도로 예상해야 함.(즉 조회결과 등도 최적화 해서 보내는게 좋다는)
+
+### 참고사이트
+
+- [참고사이트1](https://sarc.io/index.php/aws/1326-aws-ecr-docker-push)
+- [참고사이트2](https://bluese05.tistory.com/51)
