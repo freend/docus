@@ -109,16 +109,27 @@ docker run --rm -d -p 3000:3000 --network my-net --name web-server web-server:1.
 - 그래서 하나씩 실행할 때 마다 아이피를 확인하고 거기에 더하는 과정을 추가하였다.
 
 ```shell
-docker run -p 3306:3306 --network my-net -d --name sample -e MYSQL_ROOT_PASSWORD=“toor” mysql:5.7
+docker run -p 3306:3306 --network --restart always my-net -d --name sample -e MYSQL_ROOT_PASSWORD=“toor” mysql:5.7
 # 아이피 주소의 변경이 있는지 확인하자
 docker inspect sample -f "{{json .NetworkSettings.Networks }}"
 # 변경이 없는 것을 확인하였다.
+# 이제 ECR에 접속하자
+aws ecr get-login --region ap-northeast-2 --no-include-email
 # db 접속주소를 localhost에서 172.19.0.2로 변경하였다.
-docker run --rm -d -p 8080:8080 --network my-net -e -Dspring.profiles.active=local --name api-server api:0.0.1-SNAPSHOT
+# 이러면 ECR접속 주소가 나온다 그걸 복사해서 붙어넣기 후 실행하면 된다.
+# api server를 pull받자
+docker pull 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/api-server
+docker run --network my_net --restart always -d -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=dev" --name api-server 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/api-server
 docker inspect api-server -f "{{json .NetworkSettings.Networks }}"
 # api 접속주소를 localhost에서 172.19.0.3으로 변경하였다.
-docker run --rm -d -p 3000:3000 --network my-net --name web-server web-server:1.0
+docker run --network my_net --restart always -d -p 80:80 -e NODE_ENV=DEVELOP --name web-server 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/web-server
 ```
 
-- 우선 이렇게 각각 실행하면 정상적으로 작동은 한다. 그런데 이렇게 된 경우 재부팅시 주소가 바뀔수도 있다고 하는데 그건 아직 확인 못했다.
-- 급한대로 docker끼리의 네트워크를 원하시는 분은 bridge의 아이피 주소를 알아서 직접 접속을 하도록 하자.
+- 우선 이렇게 각각 실행하면 정상적으로 작동은 한다. 그런데 다음과 같은 문제가 생긴다
+  - 재부팅시 다 자동 재시작이므로 정상적으로 시작은한다. 그런데 우선순위가 없어서 아이피가 꼬인다. 그래서 순서대로 다시 실행해주면 정상적으로 작동한다.
+
+aws ecr get-login --region ap-northeast-2 --no-include-email
+
+docker run --network docker-mysql_default --restart always -d -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=dev" --name api-server 045736592940.dkr.ecr.ap-northeast-2.amazonaws.com/whoola/api-server
+
+docker run --network docker-mysql_default --restart always -d -p 80:80 -e NODE_ENV=DEVELOP --name web-server 045736592940.dkr.ecr.ap-northeast-2.amazonaws.com/whoola/web-server
