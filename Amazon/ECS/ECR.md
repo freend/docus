@@ -9,15 +9,14 @@
 #### ECR 요금제
 
 - 스토리지 사용요금과 데이터 송신 요금이 부과됨
-  - 스토리지는 500MB 까지는 프리티어 단 mysql이 437MB로 프리티어를 쓸 확율은 없다고 봐야 함.
   - 스토리지 요금은 월별 GB당 0.10 USD입니다.
   - 데이터 송신은 아무리 봐도 9.999TB아래일 듯 싶어서 보니 월 GB당 0.12 USD임.
 - 우선 내가 사용할 시스템의 ECR요금은 예상잡아 3GB정도로 예상함.
-  - Node : 1GB, Java : 1GB, Nginx + Mysql : 600MB
-  - Storage : 3 * 0.1 = 0.3USD
-  - 우선은 월간 ECR사용 요금은 0.3USD로 예상
+  - Node : 1GB, Java : 1GB
+  - Storage : 2 * 0.1 = 0.2USD
+  - 우선은 월간 ECR사용 요금은 0.2USD로 예상
   - 같은 리전에 있는 Amazon Elastic Container Registry와 Amazon EC2 간의 데이터 전송 요금은 무료(즉, GB당 0.00 USD)입니다
-  - 여기서 사용하는 데이터 전송량은 60 * 0.12 = 7.2USD
+  - 여기서 사용하는 데이터 전송량은 60(2 * 30)GB * 0.12 = 7.2USD
   - ECR의 월 예상액은 7.5USD로 책정함.
 
 ### ECR 접속하기
@@ -26,7 +25,7 @@
 - 원하는 리전에 Create Repository로 저장소를 생성합니다.
 - 그러면 내가 생성한 이름으로 저장소가 추가됨을 확인할 수 있습니다.
 - 내가 생성한 저장소로 들어가면 푸시 명령 보기라고 있습니다.
-- 누르면 다음과 같은 3가지 명령이 나오게 됩니다.
+- 누르면 다음과 같은 4가지 명령이 나오게 됩니다.
 - 저장소 이름은 sample-repo로 정의하겠습니다.
 
 ```shell
@@ -36,7 +35,7 @@ aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS
 docker build -t sample-repo .
 # 태그 하기
 docker tag sample-repo:latest 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/sample-repo:latest
-# 푸시하기 : 이건 나오지 않았음.
+# 푸시하기
 docker push 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/sample-repo:latest
 ```
 
@@ -44,17 +43,12 @@ docker push 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/sample-repo:latest
 
 - repository 이름은 서비스에 연관있게 만들면 될 거 같습니다.
 
-- 즉 나의 서비스를 기준으로 repository는 4~5개 정도면 될거 같습니다.
-
-  - 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/nginx
+- 즉 나의 서비스를 기준으로 repository는 2개가 현재 사용됩니다
 
   - 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/render
 
   - 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/api
 
-  - 000000000000.dkr.ecr.ap-northeast-2.amazonaws.com/db
-
-    > 그런데 데이터 베이스는 RDS 서비스를 쓸까 고민은 하고 있는 상태입니다.
 
 ### 데이터 전송량 이란?
 
