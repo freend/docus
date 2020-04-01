@@ -126,10 +126,5 @@ docker run --network my_net --restart always -d -p 80:80 -e NODE_ENV=DEVELOP --n
 ```
 
 - 우선 이렇게 각각 실행하면 정상적으로 작동은 한다. 그런데 다음과 같은 문제가 생긴다
-  - 재부팅시 다 자동 재시작이므로 정상적으로 시작은한다. 그런데 우선순위가 없어서 아이피가 꼬인다. 그래서 순서대로 다시 실행해주면 정상적으로 작동한다.
-
-aws ecr get-login --region ap-northeast-2 --no-include-email
-
-docker run --network docker-mysql_default --restart always -d -p 8080:8080 -e "SPRING_PROFILES_ACTIVE=dev" --name api-server 045736592940.dkr.ecr.ap-northeast-2.amazonaws.com/whoola/api-server
-
-docker run --network docker-mysql_default --restart always -d -p 80:80 -e NODE_ENV=DEVELOP --name web-server 045736592940.dkr.ecr.ap-northeast-2.amazonaws.com/whoola/web-server
+  - 재부팅시 다 자동 재시작이므로 정상적으로 시작은한다. 그런데 우선순위가 없어서 아이피가 꼬인다. 그래서 순서대로 다시 실행해줘야 정상적으로 작동한다.
+  - docker compose에는 우선순위가 있는데 ㅋㅋ 
