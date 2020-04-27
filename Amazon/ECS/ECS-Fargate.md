@@ -41,12 +41,14 @@
 ### 개선내용
 
 - web과 api를 각각의 task로 분리
-- RDS를 보안을 위해 ECS의 VPC로 이관
+- 그 후 web과 api를 각각 alb로 연결
+- RDS를 보안을 위해 ECS의 VPC로 이관하여 RDS에 접근 허용을 기본 보안그룹 허용으로 하면 api에서 rds로 연결이 가능하다.
 
-### 후행정보
+### Environment설정
 
-- Application Load Balancer에 대한 공부도 진행해야 할 듯 합니다.
+- ecs에서 environment는 어디서 설정하는지 궁금했다. 이것은 작업정의에서 컨테이너 설정을 할때 환경에 변수 부분에 key, value로 작성하면 적용된다.
 
-#### SES
+### ECS에 SES 적용하기.
 
-- https://docs.aws.amazon.com/ko_kr/sdk-for-java/v2/developer-guide/credentials.html
+- [링크](../SES/README.md)
+
