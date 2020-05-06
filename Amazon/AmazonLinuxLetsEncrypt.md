@@ -1,4 +1,13 @@
-# Amazon Linux에 Let's Encryption 적용하기
+# 인스턴스에 SSL 적용하기
+
+### 시작하기
+
+원래 해당 문서는 EC2에 ssl 적용하기 였는데 alb와 ECS를 쓰게 되면서 그에 맞춰서 내용을 변경하였다. 그래서 2개의 내용으로 나뉜다.
+
+1. [alb에 ssl적용하기](ECS/ECS-SSL.md)
+2. EC2에 ssl적용하기
+
+### EC2에 ssl적용하기
 
 회사에서 운영하는 내부 사이트에 ssl을 적용하게 되었다. ssl을 사용할 때 일반적으로 유료로 사용을 하였는데 이번엔 금액을 아끼기 위해 무료 ssl인 let's encryption을 사용하게 되었다.
 
