@@ -21,7 +21,6 @@
 - 우선 ECS를 사용하는 방법은 ReadMe에 한번 언급했던 2가지 방법이 있다. 두개의 차이를 개인적으로 이렇게 해석했다.
   - Fargate + ECS
   - EC2 + ECS
-
 -  요금의 차이.
   - Fargate + ECS :  할당 cpu + memory + 클릭 액션타임 ...
   - EC2 + ECS : EC2 인스턴스 요금
@@ -31,7 +30,11 @@
   - 레퍼런스에서 설명해 주지 않던 container간의 통신도 Fargate는 쉽게 해결해준다는 인상을 받았다.
 - 개인적으론 Fargate + ECS를 먼저 해보길 권한다. 그 후 EC2 + ECS를 해보길 개인적으로 추천한다.
 - 이것이 다 되고 Kubernetes를 다루고 싶다면 EKS를 하면 될 것이다.
--  [EC2 + ECS 해보기](ECS.md) 
-- [Fargate + ECS](ECS-Fargate.md)
 
-> EC2 + ECS는 아마 지속적인 업데이트가 될 것이다. 첨에 시도한 내용이 적혀 있기도 하고 Fargate로 현재 서비스를 구축해서 다른일을 먼저 해야 되기 때문이다.
+### 나의 설정
+
+- 초기에는 하나의 task에서 web과 api를 동시에 작동시키려 했다. 그런데 그렇게 하면 둘 중 하나만 증가해야 하는 상황에서 둘다 증가하는 문제가 생기게 된다. 그래서 다음과 같은 방법으로 진행했다.
+- alb -> web server -> alb -> api server -> data base
+- 초기 설정시엔 현실적인(금액)문제에 의해 data base에 auto scale등의 설정은 하지 않은 상태이다. 
+
+- 처음에는 EC2 + ECS로 진행하려 했으나 [Fargate + ECS](ECS-Fargate.md) 로 진행하기로 했다. 
