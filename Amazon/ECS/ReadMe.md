@@ -1,52 +1,20 @@
-# Read Me
+## Amazon ECS 사용기
 
-Operating에 대한 경험 부족과 무중단 서비스의 필요성에 의해 EKS와 ECS사이에 고민을 많이 했다.
+### AWS to ECS
 
-아래 링크를 참고하면 여러분들의 선택에 도움이 될 수 있지만, 우선은 나와 같이 경험이 없는 사람이 구축한다는 전제조건 하에 
-인터넷을 찾아보게 되었고 그 결과로 ECS를 도입하기로 하였다. ECS를 사용하게 된 이유는 아래 링크를 통해 굳히게 되었으며 
-아래 주석에 해당 부분의 번역본을 그대로 옮겨놨다.
-
-- ECS : Elastic Container Service
-
-- EKS : Elastic Kubernetes Service
-- [차이점을 알려주는 사이트](https://timewizhan.tistory.com/entry/AWS-ECS-vs-EKS)
-
-- [무엇을 쓸까?](https://spotinst.com/blog/amazon-ecs-vs-eks-container-orchestration-simplified/)
-
-아래는 무엇을 쓸까 부분에 일부 해석이 될수 있는 부분이라 생각한다.
-
-> 우리는 **ECS** 와 **EKS** 의 주요 차별화 요소를 다루었으며 이제 남은 유일한 문제는 팀에 가장 적합한 선택을 결정하는 것입니다. 
->
-> 컨테이너 오케스트레이션 플랫폼을 선택할 때 각각 장단점이 있기 때문에 옳고 그른 것은 없습니다. 
->
-> 컨테이너를 처음 사용하고 클러스터를 설정하고 배포하는 간단한 방법을 찾고 있다면 ECS가 더 쉬운 선택 일 것입니다. 
->
-> 반면에 경험이 풍부하고 클러스터를 확장하고 공급 업체 잠금을 피하는 더 좋은 방법을 찾고 있다면 EKS가 해결책 일 것입니다. 
->
-> **Kubernetes에서** 컨테이너를 이미 실행 중이 거나 호환성이 **뛰어난** **고급 오케스트레이션** 솔루션을 원하는 경우 Amazon EKS를 사용해야합니다.
->
-> **단순성** 과 **가용성** 이 결합 된 솔루션을 찾고 인프라를 **고급 제어** 하려는 경우 ECS가 올바른 선택입니다.
->
-> ECS는 **AWS 서비스** 와의 긴밀한 통합을 제공하지만 Kubernetes를 실행하는 사용자는 **오픈 소스 에코 시스템** 에서 작업함으로써 얻을 수있는 추가 기능을 즐길 수 있습니다 .
-
-- 위의 내용을 기반으로 ECS를 기본 모델로 삼기로 했다. 어차피 ECS, EKS 비슷한 것이고 지금은 우선 내 공부의 깊이가 낮으니 종속성이 더 많더라도 사용이 용이한 ECS를 사용해서 서비스를 빨리 오픈하는 것을 목표로 삼았다.
-- EKS는 추후 쿠버네티스 등의 공부를 더 한 후 적용하기로 하였다.
-- 여기서는 도커에서 시작해서 이미지 만들고 네트워크 연결하고 등등을 차근차근 가지 않을 것이다. 그냥 내가 한 순서대로 표시할 것이다.
-
-## 기본 서비스 구성
-
-서비스의 기본 구성은 다음과 같다. 물론 현재 구성표이며 얼마든지 변경 할 수 있다.
-
-운영서버를 제외한 테스트나 로컬은 데이터 베이스도 도커로 구성되어 있다.
-
-- ~~Nginx (추후 구성에서 삭제함)~~
-- Rendering Server(Node js)
-- Api Server(Java)
-- RDBS(Mysql)
-- 위에서 RDBS를 제외한 내용들은 각각 Docker로 만들기로 했으며 다음 페이지의 링크들을 참조했다
-  - [도커 node js 튜토리얼](https://nodejs.org/ko/docs/guides/nodejs-docker-webapp/)
-  - [인텔리제이에서 도커로 배포하기](https://www.bsidesoft.com/?p=7871)
-
-## 작업순서
-
+- [EKS, ECS 무엇을 사용할까?](Choice.md)
+- [web, api 서버를 도커로 만들자](CreateDocker.md)
 - [도커 이미지를 올리자 - ECR 사용하기](ECR.md)
+- [ECS란](ECS-ReadMe.md)
+- [ECS(Fargate + ECS)를 만들어 보자](ECS-Fargate.md)
+- [클러스터에 Task Definition(작업정의서)를 만들고 작업을 실행하여 작동을 확인하자.](ECS-Task.md)
+- [Task Definition에 의해 실행될 작업을 만들자](ECS-Task.md)
+- [ALB를 이용해서 연결하자](ECS-ALB.md)
+- [ALB에 도메인을 연결하자](ECS-Domain.md)
+- [ALB에 SSL을 적용하자](ECS-SSL.md)
+
+### 그 외
+
+- [EC2에서 여러 컨테이너 연결하기](EC2ConnectDocker.md)
+
+- [ECS에 SES 적용하기](../SES/README.md)
