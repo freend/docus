@@ -21,3 +21,7 @@
 - 개발분야 : Back End
 - Back End
   - java, Spring, My Batis, My Sql, Node, Express
+- 상세내역 : 회사의 송금시스템 개발, 유지, 보수,
+- Back End
+  - java, Spring Boot, JPA, My Sql, Amazon Mq
+- 상세내역 : 타사와의 시스템 동시개발로 인한 서버단 개발
