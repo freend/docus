@@ -1,16 +1,8 @@
 ## Skill
 
-### JAVA
-
-- [전체문서 보기](Java/ReadMe.md)
-
 ### AWS
 
 - [전체문서 보기](Amazon/Readme.md)
-
-### Kubernetes
-
-- [전체문서 보기](Kubenetes/ReadMe.md)
 
 ### Docker
 
@@ -20,13 +12,21 @@
 
 - [전체문서 보기](TDD/ReadMe.md)
 
-### Kafka
+### Kubernetes
 
-- [전체문서 보기](Kafka/Readme.md)
+- [전체문서 보기](Kubenetes/ReadMe.md)
+
+### JAVA
+
+- [전체문서 보기](Java/ReadMe.md)
 
 ### Node
 
 - [전체문서 보기](Node/Readme.md)
+
+### Kafka
+
+- [전체문서 보기](Kafka/Readme.md)
 
 ### HTML, CSS
 
