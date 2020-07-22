@@ -42,6 +42,13 @@ ios개발자를 구하지 못해서 제가 직접 개발을 하여 출시하게 
   - java, Spring Boot, JPA, My Sql, Amazon Mq
 - 상세내역 : 타사와의 시스템 동시개발로 인한 서버단 개발
 
+### 외주개발
+
+- 개발분야 : Back End
+  - java, Spring Boot, JPA, My Sql, Node js, Docker
+  - aws ecs, aws ecr, aws cloud watch, aws route53
+- 상세내역 : 글로벌 서비스의 api server, web server개발, paypal 결재연동, 외부 infra와의 연동
+
 ## 기술
 
 - [AWS](Amazon/Readme.md)
