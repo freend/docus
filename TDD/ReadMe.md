@@ -24,3 +24,6 @@ TDD의 장점을 몇가지로 요약하자면 다음과 같다.
 - [save를 테스트 할때 오류가 나요](Save.md)
 
 - [Page Request를 구현하고 싶어요](PageRequest.md)
+
+- [PasswordEncoder를 Autowired 없이 사용하기](PasswordEncoder.md)
+
