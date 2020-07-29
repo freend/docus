@@ -42,8 +42,9 @@ ios개발자를 구하지 못해서 제가 직접 개발을 하여 출시하게 
   - java, Spring Boot, JPA, My Sql, Amazon Mq
 - 상세내역 : 타사와의 시스템 동시개발로 인한 서버단 개발
 
-### 외주개발
+### Toy project
 - 익히고 배운 것들의 집대성, TDD 등 개발론 적인 관점도 확인해 본 시간임
+- 기간 : 2020.01 ~ 2020.06
 - 개발분야 : Back End
   - java, Spring Boot, JPA, My Sql, Node js, Docker
   - aws ecs, aws ecr, aws cloud watch, aws route53
