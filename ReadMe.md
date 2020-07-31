@@ -21,7 +21,7 @@ ios개발자를 구하지 못해서 제가 직접 개발을 하여 출시하게 
 
 ### Prom 630
 
-[대표 추천서](Recommendation/추천서_prom630.pdf)
+[대표 추천서](https://s3-ap-southeast-1.amazonaws.com/freend.recommendation/추천서_prom630.pdf){: target="_blank"}
 
 - 개발의 시작점. 이곳에서 전체적인 흐름을 배웠으며. 스타트업에서 일하는 무게감을 알게 되었다.
 - 기간 : 2016.04 ~ 2018.03
@@ -36,7 +36,7 @@ ios개발자를 구하지 못해서 제가 직접 개발을 하여 출시하게 
 
 ### 블루팬넷
 
-[대표 추천서](Recommendation/추천서_블루팬넷.pdf)
+[대표 추천서](https://s3-ap-southeast-1.amazonaws.com/freend.recommendation/추천서-블루팬넷.pdf){: target="_blank"}
 
 - 개발자로서 한발 더 완성된 시간. 도커, 쿠버네티스, 무중단 배포 등에 대해 익히게 된 시간
 - 기간 : 2018.06 ~ 2019.12
