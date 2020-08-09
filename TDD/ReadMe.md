@@ -19,6 +19,8 @@ TDD의 장점을 몇가지로 요약하자면 다음과 같다.
 
 ## Controller
 
+- [Token을 사용하는데 테스트해야 해요](Jwt.md)
+
 ## Service
 
 - [save를 테스트 할때 오류가 나요](Save.md)
@@ -27,3 +29,6 @@ TDD의 장점을 몇가지로 요약하자면 다음과 같다.
 
 - [PasswordEncoder를 Autowired 없이 사용하기](PasswordEncoder.md)
 
+## Other
+
+- [Any를 사용하는데 Invalid use of argument matchers! 가 발생해요](ProblemAny.md)
