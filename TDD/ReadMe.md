@@ -19,6 +19,8 @@ TDD의 장점을 몇가지로 요약하자면 다음과 같다.
 
 ## Controller
 
+- [TDD Setting](Controller.md)
+
 - [Token을 사용하는데 테스트해야 해요](Jwt.md)
 
 ## Service
