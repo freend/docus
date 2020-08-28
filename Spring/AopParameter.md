@@ -14,7 +14,7 @@ Aspect-Oriented Programming 이란 프로그램 구조에 대해 또 다른 사�
 
 ## 1. 일단 동작하는 AOP 만들기
 
-```
+```java
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface AccountValidator {
@@ -66,7 +66,7 @@ IDE를 통해서도 AOP가 제대로 걸려있음을 확인할 수 있다.
 
 ## 2. 계정의 유효성을 판단하려면 ID와 Token 값을 알아야 한다. logic()에 파라미터로 추가해 보자.
 
-```
+```java
 @Service
 public class BusinessService {
     @AccountValidator
@@ -78,7 +78,7 @@ public class BusinessService {
 
 유효성을 AOP를 통해 판단하려면, Aspect에서 id와 token 값을 가져와야한다. 간단하게 Pointcut의 표현식 중 하나인 args를 사용해보자.
 
-```
+```java
 @Aspect
 @Component
 public class ValidatorAspect {
@@ -112,7 +112,7 @@ logic2()에서는 사용자의 이름이 앞에 추가되었다. IDE를 통해 �
 
 JoinPoint를 활용해보자.
 
-```
+```java
 @Aspect
 @Component
 public class ValidatorAspect {
@@ -168,7 +168,7 @@ java.lang.reflect.Parameter 객체는 자바 8에서 추가되었고, 메소드 
 
 Stream을 사용해서 좀 더 우아하게 만들어보자.
 
-```
+```java
 @Aspect
 @Component
 public class ValidatorAspect {
