@@ -21,11 +21,16 @@ docker inspect centos_test | grep IPAddress
                     "IPAddress": "172.17.0.3",
 ```
 
-- docker save / load
+- docker save / load 이것을 이용하면 레파지토리 사용없이 파일을 전달해서 사용할 수 있다.
 
-```
-image : save / load
-container : export / import
+```shell
+# image : save / load load는 docker image의 history까지 보여줌
+$ docker save -o rabbitmq_managment.tar rabbitmq:managment
+$ docker load -i rabbitmq_managment.tar
+
+# container : export / import docker image의 history가 없음
+$ docker export (컨테이너명 or 컨테이너 ID) > (컨테이너).tar
+$ docker import (파일 또는 URL)
 ```
 
 - container to image
