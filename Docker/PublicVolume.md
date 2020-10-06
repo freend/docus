@@ -1,6 +1,19 @@
-## Docker의 Container Volume공유
+## Docker 파일 공유하기
 
-- volumes-from을 사용하면 동일한 volume를 공유하게 된다.
+### Docker와 호스트 파일 공유하기
+
+- 호스트와 docker간의 파일을 공유하기 위해서는 `-v` 명령을 사용한다
+
+```shell
+# docker run -v <호스트 경로>:<컨테이너 내 경로>:<권한>
+$ docker run -it --name data_share -v ~/Documents/data_dir:/data_dir ubuntu /bin/bash
+```
+
+- 권한은 ro(readonly), rw(readwrite)가 있다. 기본값은 ro이다.
+
+### Docker의 Container Volume공유
+
+- volumes-from을 사용하면 동일한 volume를 선언한 모든 컨테이너에서 공유하게 된다.
 
 ```shell
 docker run -it --name data_share -v ~/Documents/data_dir:/data_dir ubuntu /bin/bash
