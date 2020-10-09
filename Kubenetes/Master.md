@@ -36,6 +36,8 @@ kubeadm join 192.168.0.117:6443 --token q9884c.01f0tfhe2943axdk \
 [root@k8s-master ~] chown $(id -u):$(id -g) $HOME/.kube/config
 
 # calico와 coredns 관련 Pod의 Status가 Running인지 확인
+# 이것의 역활은 kubeadm의 클러스터를 만들때 사용되는 것이다.
+# 많이 사용하는게 calico, cilium, flannel, weave net등이 있다.
 [root@k8s-master ~] curl -O https://docs.projectcalico.org/v3.9/manifests/calico.yaml
 [root@k8s-master ~] kubectl apply -f calico.yaml
 [root@k8s-master ~] kubectl get pods --all-namespaces
